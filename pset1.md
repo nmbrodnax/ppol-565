@@ -21,7 +21,7 @@ Include all code for this section in a script called *pset2_part1_netid.py* (or 
 
 #### Part 2 - APIs
 
-Include all code for this section in a script called *pset2_part2_netid.py*.  This script should produce a CSV file called *pset2_part2_netid.py*.  You may wish to review the [API documentation](https://github.com/DataUSA/datausa-api/wiki/Data-API) available from [DataUSA](https://datausa.io).
+Include all code for this section in a script called *pset2_part2_netid.py* (or *pset2_part2_netid.R*).  This script should produce a CSV file called *pset2_part2_netid.py*.  You may wish to review the [API documentation](https://github.com/DataUSA/datausa-api/wiki/Data-API) available from [DataUSA](https://datausa.io).
 
 Write a script to query two variables from any DataUSA API dataset other than IPEDS (e.g., Bureau of Labor Statistics, County Health Records, etc.).  Your script should produce a CSV file with the results of your query.  NOTE: Do not use the "Download as CSV" query option available through the API.
 
