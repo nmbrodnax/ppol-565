@@ -1,0 +1,85 @@
+---
+title: "FTC Lab"
+author: "Nalette Brodnax"
+date: "February 19, 2019"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+```
+
+## PART 1
+Import data from FTC website and combine into one dataframe
+
+```{r }
+host <- 'https://www.ftc.gov/system/files/attachments/do-not-call-dnc-reported-calls-data/dnc_complaint_numbers_2019-'
+dates <- c('02-04', '02-05', '02-06', '02-07', '02-08')
+
+dnc <- dates %>% 
+  map(function(date) paste(host, date, '.csv', sep = "")) %>% 
+  map(function(url) read_csv(url, col_types = 'cccccccc')) %>% 
+  bind_rows()
+
+```
+
+## PART 2
+Assess missing data
+
+```{r}
+tally_missing <- function(df){
+  missing <- df %>% 
+    mutate_all(is.na) %>% 
+    summarise_all(sum) %>% 
+    gather(variable, missing)
+  return(missing)
+}
+
+print(tally_missing(dnc))
+```
+
+## PART 3
+Replace Consumer_City with Description and drop missing values
+
+```{r}
+ac <- read_csv('data/area_codes_raw.csv', col_types = 'ccc')
+
+dnc <- dnc %>% 
+  left_join(ac, by = c('Consumer_Area_Code' = 'Area Code')) %>% 
+  select(-Consumer_City) %>% 
+  na.omit()
+
+print(tally_missing(dnc))
+```
+## PART 4
+Visualize calls by categories
+
+```{r}
+dnc %>% 
+  group_by(Subject) %>% 
+  summarise(Complaints = n()) %>% 
+  ggplot(aes(x=reorder(Subject, Complaints), y=Complaints)) + geom_bar(stat='identity') + 
+  coord_flip() + xlab('Subject')
+
+```
+
+```{r}
+dnc %>% 
+  group_by(Consumer_State) %>% 
+  summarise(Complaints = n()) %>% 
+  ggplot(aes(x=reorder(Consumer_State, Complaints), y=Complaints)) + 
+  geom_bar(stat='identity') + coord_flip() + xlab('Consumer_State')
+```
+
+```{r}
+dnc %>% 
+  group_by(Recorded_Message_Or_Robocall) %>% 
+  summarise(Complaints = n()) %>% 
+  ggplot(aes(x=reorder(Recorded_Message_Or_Robocall, Complaints), y=Complaints)) + 
+  geom_bar(stat='identity') + coord_flip() + 
+  xlab('Recorded_Message_Or_Robocall')
+```
