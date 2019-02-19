@@ -79,5 +79,5 @@ ac %>%
   bind_cols(match_matrix) %>% 
   mutate(Area = V2) %>% 
   select(-V1, -V2) %>% 
-  write_csv(path='../data/area_codes_cleanR.csv', na = '') %>% 
+  write_csv(path='data/area_codes_cleanR.csv', na = '') %>% 
   head()

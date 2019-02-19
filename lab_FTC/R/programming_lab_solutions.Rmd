@@ -83,3 +83,42 @@ dnc %>%
   geom_bar(stat='identity') + coord_flip() + 
   xlab('Recorded_Message_Or_Robocall')
 ```
+
+## PART 5
+
+```{r}
+# Summarize the most offending phone numbers
+Complaints <- dnc %>% 
+  group_by(Company_Phone_Number) %>% 
+  summarise(Complaints = n()) %>% 
+  arrange(desc(Complaints)) 
+
+summary(Complaints)
+```
+
+```{r}
+# Distribution of Total_Calls greater than 10
+Complaints %>% 
+  filter(Complaints > 10) %>% 
+  ggplot(aes(Complaints)) + geom_histogram(bins = 25)
+```
+
+```{r}
+# Proportion of phone numbers made more than 10 calls?
+count(filter(Complaints, Complaints > 10))/count(Complaints)
+```
+
+## BONUS
+```{r}
+## Area code data from https://www.bennetyee.org/ucsd-pages/area.html 
+area <- '.*: (.*) \\(.*\\)'
+match_matrix <- as.tibble(str_match(ac$Description, area))
+
+ac %>% 
+  bind_cols(match_matrix) %>% 
+  mutate(Area = V2) %>% 
+  select(-V1, -V2) %>% 
+  write_csv(path ='data/area_codes_cleanR.csv', na = '') %>% 
+  head()
+```
+
