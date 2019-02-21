@@ -7,9 +7,11 @@
   # Load data (fictional data)
   df1 <- read.csv("https://raw.githubusercontent.com/nmbrodnax/ppol-565/master/misc_resources/merging/df1.csv", header = TRUE)
   df2 <- read.csv("https://raw.githubusercontent.com/nmbrodnax/ppol-565/master/misc_resources/merging/df2.csv", header = TRUE)
+    #View(df1)
+    #View(df2)
   # Note: Between both dataframes, there are seven unique people. Three are both in df1 and df2. Two are only in df1 and two are only in df2.
   
-  # Inner join (only adds the data from variables in both datasets for the Names that are in common between df1 and df2)
+  # Inner join (only joins the data from variables in both datasets for the Names that are in common between df1 and df2)
   inner <- merge(df1, df2, all = FALSE, by = "Name")
     #View(inner)
   
