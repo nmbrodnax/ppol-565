@@ -18,14 +18,14 @@
     #View(outer)
   
   # Left join (joins data from df2 to df1, but only for the Names that are in df1, again take note of the missing data and the order in which the variables are the dataframe)
-  # Note: left and left2 are identical objects. Take note of the order in which the dataframes are specified and whether all.x or all.y is used.
+  # Note: left and left2 are identical objects in terms of the data that they contain. Take note of the order in which the dataframes are specified and whether all.x or all.y is used.
   left <- merge(df1, df2, all.x = TRUE, by = "Name")
   left2 <- merge(df2, df1, all.y = TRUE, by = "Name")
     #View(left)
     #View(left2)  
   
   # Right join (join data from df1 to df2, but only for the Names that are in df2, again take note of the missing data and the order in which the variables are the dataframe)
-  # Note: right and right2 are identical objects. Take note of the order in which the dataframes are specified and whether all.x or all.y is used.
+  # Note: right and right2 are identical objects in terms of the data that they contain. Take note of the order in which the dataframes are specified and whether all.x or all.y is used.
   right <- merge(df1, df2, all.y = TRUE, by = "Name")
   right2 <- merge(df2, df1, all.x = TRUE, by = "Name")
     #View(right)
