@@ -8,13 +8,11 @@
   df1 <- read.csv("https://raw.githubusercontent.com/nmbrodnax/ppol-565/master/misc_resources/merging/df1.csv", header = TRUE)
   df2 <- read.csv("https://raw.githubusercontent.com/nmbrodnax/ppol-565/master/misc_resources/merging/df2.csv", header = TRUE)
   
-  
   # inner join (only adds the data from variables in both datasets for the Names that are in common between df1 and df2)
   inner <- merge(df1, df2, all = FALSE, by = "Name")
   
   # outer join (joins all of the Names, notice the missing data)
   outer <- merge(df1, df2, all = TRUE, by = "Name")
-  
   
   # left join (joins data from df2 to df1, but only for the Names that are in df1, again take note of the missing data)
   # note: left and left2 are identical objects. Take note of the order in which the dataframes are specified and whether all.x or all.y is used.
