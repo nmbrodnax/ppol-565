@@ -13,7 +13,7 @@
   inner <- merge(df1, df2, all = FALSE, by = "Name")
     #View(inner)
   
-  # outer join (joins all of the Names, notice the missing data)
+  # outer join (joins all of the Names and variables from both dataframes, notice the missing data)
   outer <- merge(df1, df2, all = TRUE, by = "Name")
     #View(outer)
   
