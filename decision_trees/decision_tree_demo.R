@@ -27,7 +27,7 @@
   df2 <- as.data.frame(df2)
   
   # Predict with new samples
-  dtree_pred_basic <- predict(dtree_fit_basic, newdata = )
+  dtree_pred_basic <- predict(dtree_fit_basic, newdata = df2)
   
   # load data from the datasets package
   data(iris)
